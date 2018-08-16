@@ -18,7 +18,7 @@ def focal_loss(classes_num, gamma=2., alpha=.25, e=0.1):
         #2# get balanced weight alpha
         classes_weight = array_ops.zeros_like(prediction_tensor, dtype=prediction_tensor.dtype)
 
-        total_num = sum(classes_num)
+        total_num = float(sum(classes_num))
         classes_w_t1 = [ total_num / ff for ff in classes_num ]
         sum_ = sum(classes_w_t1)
         classes_w_t2 = [ ff/sum_ for ff in classes_w_t1 ]   #scale
