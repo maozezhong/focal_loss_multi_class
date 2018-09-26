@@ -4,7 +4,7 @@
 - add LSR (label smoothing regularization)
 
 ## Usage
-- firstly, you should get a list which contains each class number, like classes_nu=[1,2,3] means index_0 class have 1 pic, index_1 class have 1 pics.
+- firstly, you should get a list which contains each class number, like classes_nu=[1,2,3] means index_0 class have 1 pic, index_1 class have 1 pics, index_2 class have 3 pics.
 - then, use the focal loss function like below:
 > model.compile(optimizer=SGD(lr=learning_rate, momentum=0.9), loss=[focal_loss(classes_num)], metrics=['accuracy'])
 
