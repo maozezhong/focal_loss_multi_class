@@ -12,7 +12,7 @@ def focal_loss(classes_num, gamma=2., alpha=.25, e=0.1):
 
         #1# get focal loss with no balanced weight which presented in paper function (4)
         zeros = array_ops.zeros_like(prediction_tensor, dtype=prediction_tensor.dtype)
-        one_minus_p = array_ops.where(target_tensor > zeros, target_tensor - prediction_tensor, zeros)
+        one_minus_p = array_ops.where(tf.greater(target_tensor,zeros), target_tensor - prediction_tensor, zeros)
         FT = -1 * (one_minus_p ** gamma) * tf.log(tf.clip_by_value(prediction_tensor, 1e-8, 1.0))
 
         #2# get balanced weight alpha
@@ -25,7 +25,7 @@ def focal_loss(classes_num, gamma=2., alpha=.25, e=0.1):
         classes_w_tensor = tf.convert_to_tensor(classes_w_t2, dtype=prediction_tensor.dtype)
         classes_weight += classes_w_tensor
 
-        alpha = array_ops.where(target_tensor > zeros, classes_weight, zeros)
+        alpha = array_ops.where(tf.greater(target_tensor, zeros), classes_weight, zeros)
 
         #3# get balanced focal loss
         balanced_fl = alpha * FT
