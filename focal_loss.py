@@ -29,7 +29,7 @@ def focal_loss(classes_num, gamma=2., alpha=.25, e=0.1):
 
         #3# get balanced focal loss
         balanced_fl = alpha * FT
-        balanced_fl = tf.reduce_sum(balanced_fl)
+        balanced_fl = tf.reduce_mean(balanced_fl)
 
         #4# add other op to prevent overfit
         # reference : https://spaces.ac.cn/archives/4493
